@@ -1,0 +1,81 @@
+<div class="body">
+    <mat-toolbar>
+        <!-- <button mat-icon-button>
+          <mat-icon>people</mat-icon>
+        </button> -->
+        <span >END-2-END ENCRYPTION REAL TIME CHAT</span>
+    </mat-toolbar>
+    
+    <div class="container-fluid p-0">
+        <div class="container p-0">
+            <div class="row">
+                <div class="col">
+                    <div class="toolbar py-5 d-flex flex-column">
+                        <div class="row spacer"></div>
+                        <div>
+                            <h1>RADSADORN</h1>
+                        </div>
+                        <div class="row spacer"></div>
+                        <div class="row" [style]="{'width': '60%'}">
+                            <button type="button" class="btn btn-light btn-md" (click)="closeChat()">
+                                CLOSE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col mb-5">
+    
+                    <div class="content pb-5">
+                
+                        <div class="chat-list-box m-5 ">
+                            <div class="offset-md-1 col-md-10">
+                                <div class="row pb-2 border-bottom">
+                                    <span>{{chatName}}</span>
+                                </div>
+                    
+                                <div class="chat-list-item my-3 px-3 scroll border-bottom">
+                                    <!-- [class.selected]='docId === currentDoc' -->
+                                    <mat-list class="chat-list">
+                                        <mat-list-item *ngFor="let message of messages"
+                                        [ngClass]="[(message.type === event.MESSAGE_RECEIVED && message.from === user.username)? 'chat-list-item': '']">
+                                          <h4 mat-line *ngIf="message.type === event.MESSAGE_RECEIVED">
+                                            <b>{{message.from}}</b>
+                                          </h4>
+                                          <p mat-line *ngIf="message.type === event.MESSAGE_RECEIVED">
+                                            <span class="white-space-normal"> {{message.content}} </span>
+                                          </p>
+                                          <p mat-line *ngIf="message.type === event.PEER_JOINED" class="chat-notification">
+                                            <span> <b>{{message.from.name}}</b> joined the room. </span>
+                                          </p>
+                                          <p mat-line *ngIf="message.type === event.PEER_LEFT" class="chat-notification">
+                                            <span> <b>{{message.from.name}}</b> left the room. </span>
+                                          </p>
+                                        </mat-list-item>
+                                    </mat-list>
+                                </div>
+
+                                <div class="chat-footer-container">
+                                    <mat-icon>message</mat-icon>
+                                    <mat-form-field class="chat-input">
+                                      <input matInput 
+                                            #inputMessage 
+                                            maxlength="140" 
+                                            [(ngModel)]="messageContent" 
+                                            (keyup.enter)="sendMessage(messageContent)">
+                                      <mat-hint align="end">{{inputMessage.value.length}}/140</mat-hint>
+                                    </mat-form-field>
+                                    <button type="button" class="btn btn-success" (click)="sendMessage(messageContent)">
+                                        SEND
+                                    </button>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div> 
+    
+            </div>
+        </div>
+    </div>
+    </div>

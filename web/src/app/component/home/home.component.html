@@ -1,0 +1,85 @@
+<div class="body">
+<mat-toolbar>
+    <!-- <button mat-icon-button>
+      <mat-icon>people</mat-icon>
+    </button> -->
+    <span >END-2-END ENCRYPTION REAL TIME CHAT</span>
+</mat-toolbar>
+
+<div class="container-fluid p-0">
+    <div class="container p-0">
+        <div class="row">
+            <div class="col">
+                <div class="toolbar py-5 d-flex flex-column">
+                    <div class="row spacer"></div>
+                    <div>
+                        <h1>RADSADORN</h1>
+                    </div>
+                    <div class="row spacer"></div>
+                    <div class="row" [style]="{'width': '60%'}">
+                        <button type="button" class="btn btn-warning btn-md" (click)="joinNewChat()">
+                            JOIN CHAT
+                        </button>
+                        <div class="px-1"></div>
+                        <button type="button" class="btn btn-success btn-md" (click)="createNewChat()">
+                            NEW CHAT
+                        </button>
+                        <button type="button" class="btn btn-light btn-md">
+                            LOGOUT
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-5">
+
+                <div class="content pb-5">
+            
+                    <div class="chat-list-box m-5 ">
+                        <div class="offset-md-1 col-md-10">
+                            <div class="row pb-2 border-bottom">
+                                <span>ห้องแชททั้งหมด</span>
+                            </div>
+                
+                            <div class="chat-list my-3 px-3 scroll border-bottom">
+                                <!-- [class.selected]='docId === currentDoc' -->
+                                <div *ngIf="chatRoom.length">
+                                    <button class="card mb-3"
+                                        (click)='chatSelected(chat.name)'
+                                        *ngFor='let chat of chatRoom'
+                                    >
+                                        <div class="row chat-card">
+                                            <div class="col-md p-0 chat-name">
+                                                <span>{{ chat.name }}</span>
+                                            </div>
+                                            <div class="col-md p-0 chat-member">
+                                                <span [style]="{'color': (chat.memberCount=='4') ? '#dd191d' : '#0a8f08'}">
+                                                    ({{ chat.memberCount }} /4)
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+
+                                <div 
+                                    *ngIf="!chatRoom.length"
+                                    class="d-flex justify-content-center"
+                                >
+                                    <span 
+                                        class="my-5"
+                                        [style]="{'font-size' : '15px', 'opacity' : '0.5'}"
+                                    >
+                                        เริ่มต้นแชทใหม่ของคุณ
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </div> 
+
+        </div>
+    </div>
+</div>
+</div>

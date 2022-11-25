@@ -1,0 +1,22 @@
+<span>{{data}}</span>
+<hr class="">
+<div class="d-flex justify-content-center align-items-center">
+    <!-- <mat-form-field appearance="legacy" class="rounded" [style]="{'font-size': '16px', 'width': '80%'}">
+        <mat-label></mat-label>
+        <mat-select [(ngModel)]="data" class="text-center">
+            <mat-option *ngFor="let color of headerColors" class="text-center" [value]="color.remark"
+                [style]="{'font-size': '14px'}"
+            >
+                <span>{{color.remark}}</span>
+            </mat-option>
+        </mat-select>
+    </mat-form-field> -->
+</div>
+<div>
+    <hr class="my-3">
+    <div [style]="{'text-align': 'center'}">
+        <button class="btn mx-2" [style]="{'background-color': '#ff5c5c'}" (click)="onCancelClick()">ยกเลิก</button>
+        <!-- <button [disabled]="false" class="btn mx-2" [style]="{'background-color': '#00A651'}"
+            [mat-dialog-close]="chat" cdkFocusInitial>ยืนยัน</button> -->
+    </div>
+</div>
