@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CryptoService } from '../../services/crypto.service';
 import { User, Event, Room } from '../../models';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from 'src/app/services/chat.service';
 
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,25 +19,21 @@ export class HomeComponent implements OnInit {
 
     title = 'e2e-real-time-chat';
 
-    user!: User
-
-    chatRoom: any[] = [
-        // { name: 'Radadorn', memberCount: 1 },
-        // { name: 'CE 58 (4D)', memberCount: 2 },
-        // { name: 'NEW CHAT', memberCount: 3 },
-        // { name: 'CHAT TEST', memberCount: 4 },
-        // { name: 'Radadorn', memberCount: 1 },
-        // { name: 'CE 58 (4D)', memberCount: 2 },
-        // { name: 'NEW CHAT', memberCount: 3 },
-        // { name: 'CHAT TEST', memberCount: 4 },
-        // { name: 'Radadorn', memberCount: 1 },
-        // { name: 'CE 58 (4D)', memberCount: 2 },
-        // { name: 'NEW CHAT', memberCount: 3 },
-        // { name: 'CHAT TEST', memberCount: 4 },
+    token = [
+        'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjFQT05HIiwicHVibGljS2V5QmFzZTY0IjoiZ2ZkZ2xnJ2ZsaCIsInByaXZhdGVLZXlCYXNlNjQiOiJmaGtmaGRsaGtkamgiLCJpYXQiOjE2NjkzNjI3MTUsImV4cCI6MTY2OTQwNTkxNX0.yVdUV9idH4ccgi0QwmWqqpzuOpxTUFrA8n7iArefuHcdb-seTugtP824dUD4_ONEB2Y7rM2lCZRDwlb3iWDCBw',
+        'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJBRFNBRE9STiIsInB1YmxpY0tleUJhc2U2NCI6ImdmZGdsZydmbGgiLCJwcml2YXRlS2V5QmFzZTY0IjoiZmhrZmhkbGhrZGpoIiwiaWF0IjoxNjY5MzYyNzc0LCJleHAiOjE2Njk0MDU5NzR9.44qQHhn3mwg8tyyBWaol0HvazBV9Ot6dGQez937ou47K5CpI70jm-sIMtOy8XByAiTRx0R8hvCqZOFeUSqlyZQ',
+        'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5BTiIsInB1YmxpY0tleUJhc2U2NCI6ImdmZGdsZydmbGgiLCJwcml2YXRlS2V5QmFzZTY0IjoiZmhrZmhkbGhrZGpoIiwiaWF0IjoxNjY5MzYyODYzLCJleHAiOjE2Njk0MDYwNjN9.2trYwi5FQ-blKMzeRUZgQdhwsF3bXE6fNUcxmIEMy1AjhY9_s3MA-hsQtLLwIlx2juAf1QTJ6Ma9MkHwjdorGw'
     ];
+
+    user!: any;
+
+    id!: number;
+
+    chatRoom: any[] = [];
 
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         private authService: AuthService,
         private chatService: ChatService,
         private cryptoService: CryptoService,
@@ -46,7 +42,16 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         console.log('Start');
-        this.loadMyChat();
+        this.route.params.subscribe(params => {
+            this.id = params['id'];
+            const token = this.token[this.id];
+
+            this.chatService.setToken(token);
+
+            this.user = this.authService.getUserToken(token);
+            console.log(this.user);
+            this.loadMyChat();
+        })
     }
 
     // loadUserData(): void {
@@ -69,7 +74,7 @@ export class HomeComponent implements OnInit {
     chatSelected(chatName: string): void {
         console.log(chatName);
         this.chatService.openRoom(chatName);
-        this.router.navigate(['chat', chatName]);
+        this.router.navigate(['chat', chatName + ' ' + JSON.stringify(this.id)]);
     }
 
     loadMyChat(): void {

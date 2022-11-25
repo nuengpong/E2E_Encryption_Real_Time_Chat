@@ -21,13 +21,12 @@ export class User {
     // avatar: string;
   
     constructor(
-      public name: string,
-      public id: number,
+      public username: string,
       public publicKey?: CryptoKey,
       public base64EncodedPublicKey?: string,
       public base64EncodedPrivateKey?: string
       ) {
-        this.name = name;
+        this.username = username;
         // this.avatar = `../../../assets/avatar/man${this.id % 4}.png`;
     }
 }

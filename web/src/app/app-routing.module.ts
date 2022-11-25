@@ -13,7 +13,7 @@ const routes: Routes = [
     component: AppComponent,
     // canActivate: [AuthGuard],
     children: [
-      { path: '', component: HomeComponent },
+      { path: ':id', component: HomeComponent },
       { path: 'chat/:name', component: ChatComponent }
     ]
   },

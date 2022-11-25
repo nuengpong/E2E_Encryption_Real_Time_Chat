@@ -19,10 +19,10 @@ export class AuthGuard implements CanActivate {
         if (!cognito) this.router.navigate(['/login']);
         if ((cognito as any) === '[object Object]') this.router.parseUrl('/login');
 
-        const userToken = this.auth.getUserToken();
-        if (!userToken) {
-            this.router.navigate(['/login']);
-        }
+        // const userToken = this.auth.getUserToken();
+        // if (!userToken) {
+        //     this.router.navigate(['/login']);
+        // }
         return true;
 
     }

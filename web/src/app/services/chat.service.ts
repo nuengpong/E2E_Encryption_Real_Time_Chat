@@ -18,12 +18,14 @@ export class ChatService {
 
     private apiUrl = environment.SERVER_URL;
 
-    newMessage = this.socket.fromEvent<Document>('messageReceived');
+    newMessage = this.socket.fromEvent<any>('messageReceived');
 
     // public messages!: Subject<any>;
     // private channel!: Room;
     // private user!: User;
     // private peers: User[] = [];
+
+    token = '';
 
     constructor(
       private socket: Socket,
@@ -33,7 +35,11 @@ export class ChatService {
 
     authorizationHeaders(): HttpHeaders {
       return new HttpHeaders()
-          .set('Authorization', 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJwdWJsaWNLZXlCYXNlNjQiOiJnZmRnbGcnZmxoIiwicHJpdmF0ZUtleUJhc2U2NCI6ImZoa2ZoZGxoa2RqaCIsImlhdCI6MTY2OTM1NDk4NywiZXhwIjoxNjY5Mzk4MTg3fQ.jcI-HMSIJ9zvzTunV0I5wYwlIaMna8Sq7GW-64mKh-ti8ngl1mZ8T1o_ArWbJ76PJkrIpB2cdeQVzHydGulKYw');
+          .set('Authorization', this.token);
+    }
+
+    setToken(token: string): void {
+      this.token = token;
     }
 
     openRoom(name: string): void {
@@ -41,10 +47,11 @@ export class ChatService {
     }
 
     closeRoom(name: string): void {
-      this.socket.emit('openRoom', name);
+      this.socket.emit('closeRoom', name);
     }
 
     sendMessage(message: any): void {
+      console.log(message);
       this.socket.emit('sendMessage', message);
       // this.userService.createNewUser
     }

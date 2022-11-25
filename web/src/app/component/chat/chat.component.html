@@ -13,7 +13,7 @@
                     <div class="toolbar py-5 d-flex flex-column">
                         <div class="row spacer"></div>
                         <div>
-                            <h1>RADSADORN</h1>
+                            <h1>{{user.username}}</h1>
                         </div>
                         <div class="row spacer"></div>
                         <div class="row" [style]="{'width': '60%'}">
@@ -34,9 +34,8 @@
                                     <span>{{chatName}}</span>
                                 </div>
                     
-                                <div class="chat-list-item my-3 px-3 scroll border-bottom">
                                     <!-- [class.selected]='docId === currentDoc' -->
-                                    <mat-list class="chat-list">
+                                    <mat-list class="chat-list my-3 px-3 scroll border">
                                         <mat-list-item *ngFor="let message of messages"
                                         [ngClass]="[(message.type === event.MESSAGE_RECEIVED && message.from === user.username)? 'chat-list-item': '']">
                                           <h4 mat-line *ngIf="message.type === event.MESSAGE_RECEIVED">
@@ -53,9 +52,8 @@
                                           </p>
                                         </mat-list-item>
                                     </mat-list>
-                                </div>
 
-                                <div class="chat-footer-container">
+                                <div class="chat-footer-container ">
                                     <mat-icon>message</mat-icon>
                                     <mat-form-field class="chat-input">
                                       <input matInput 
@@ -65,9 +63,9 @@
                                             (keyup.enter)="sendMessage(messageContent)">
                                       <mat-hint align="end">{{inputMessage.value.length}}/140</mat-hint>
                                     </mat-form-field>
-                                    <button type="button" class="btn btn-success" (click)="sendMessage(messageContent)">
+                                    <!-- <button type="button" class="btn btn-success" (onClick)="sendMessage(messageContent)">
                                         SEND
-                                    </button>
+                                    </button> -->
                                   </div>
                             </div>
                         </div>

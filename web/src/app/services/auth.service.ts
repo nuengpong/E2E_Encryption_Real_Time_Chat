@@ -28,10 +28,10 @@ export class AuthService {
         );
     }
 
-    getUserToken(): any {
-        const token = this.getCurrentSession();
+    getUserToken(token: string): any {
+        // const token = this.getCurrentSession();
         if (!token) return null;
-        const payload: any = jwt_decode(token.id_token);
+        const payload: any = jwt_decode(token);
         const username: string = payload['username'];
         const publicKeyBase64: string = payload['publicKeyBase64'];
         const privateKeyBase64: string = payload['privateKeyBase64'];
